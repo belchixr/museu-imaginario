@@ -77,7 +77,7 @@ const Frame = forwardRef<THREE.Mesh, FrameProps>(
     const handleClick = () => onFrameClick?.(index);
 
     return (
-        <group ref={internalRef} position={[position[0], position[1], position[2] + (isDouble ? 0.2 : 0)]} rotation={rotation}>
+        <group ref={internalRef} position={[position[0], position[1], position[2] + (isDouble ? 0.8 : 0)]} rotation={rotation}>
         {textures.map((texture, i) => {
           const xOffset =
             textures.length === 2
@@ -125,29 +125,31 @@ const Frame = forwardRef<THREE.Mesh, FrameProps>(
           );
         })}
 
-        <mesh
-          position={[
-            (textures.length === 2
-              ? FRAME_WIDTH + FRAME_GAP
-              : FRAME_WIDTH / 2) + 0.2,
-            height / 2 - 0.2,
-            -0.05,
-          ]}
-        >
-          <Text
-            position={[0, 0, 0.015]}
-            fontSize={0.06}
-            color="#383838"
-            anchorX="left"
-            anchorY="middle"
-            maxWidth={0.7}
-            textAlign="left"
-            lineHeight={1.3}
-            font="/fonts/Inter_28pt-SemiBold.ttf"
+        {isZoomed && (
+          <mesh
+            position={[
+              (textures.length === 2
+                ? FRAME_WIDTH + FRAME_GAP
+                : FRAME_WIDTH / 2) + 0.2,
+              height / 2 - 0.2,
+              -0.05,
+            ]}
           >
-            {image.description}
-          </Text>
-        </mesh>
+            <Text
+              position={[0, -.6, 0.015]}
+              fontSize={0.065}
+              color="#383838"
+              anchorX="left"
+              anchorY="middle"
+              maxWidth={1}
+              textAlign="left"
+              lineHeight={1.3}
+              font="/fonts/Inter_28pt-SemiBold.ttf"
+            >
+              {image.description}
+            </Text>
+          </mesh>
+        )}
 
         {isZoomed && (
           <mesh position={[0, -height / 2 - 0.22, -0.04]}>
